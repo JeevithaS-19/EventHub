@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventHub | Discover Events</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            Event<span>Hub</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#events">Events</a>
+            <a href="#add-event">Add Event</a>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="hero-tag">DISCOVER • CONNECT • EXPERIENCE</p>
+
+            <h1>
+                Find Your Next
+                <span>Great Event.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover technology, workshops, conferences and
+                exciting events happening around you.
+            </p>
+
+            <a href="#events" class="hero-button">
+                Explore Events
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Events Section -->
+    <section id="events" class="events-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="section-tag">EXPLORE</p>
+
+                <h2>Upcoming Events</h2>
+            </div>
+
+            <p class="section-description">
+                Find events that match your interests.
+            </p>
+
+        </div>
+
+
+        <!-- Search and Filters -->
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search events..."
+            >
+
+            <select id="categoryFilter">
+
+                <option value="">All Categories</option>
+
+                <option value="Technology">
+                    Technology
+                </option>
+
+                <option value="Workshop">
+                    Workshop
+                </option>
+
+                <option value="Conference">
+                    Conference
+                </option>
+
+                <option value="Cultural">
+                    Cultural
+                </option>
+
+                <option value="Sports">
+                    Sports
+                </option>
+
+            </select>
+
+            <input
+                type="text"
+                id="locationFilter"
+                placeholder="Location"
+            >
+
+            <button id="filterButton">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- Events Container -->
+        <div id="eventsContainer" class="events-container">
+
+            <!-- Events will be loaded here using JavaScript -->
+
+            <div class="loading">
+                Loading events...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Add Event Section -->
+    <section id="add-event" class="add-event-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="section-tag">CREATE</p>
+
+                <h2>Add an Event</h2>
+            </div>
+
+        </div>
+
+
+        <form id="eventForm" class="event-form">
+
+            <div class="form-group">
+
+                <label for="title">
+                    Event Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter event title"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Describe the event"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="date">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="time">
+                        Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="time"
+                        placeholder="10:00 AM"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Enter location"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="category"
+                        placeholder="Technology"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="organizer">
+                    Organizer
+                </label>
+
+                <input
+                    type="text"
+                    id="organizer"
+                    placeholder="Enter organizer name"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="submit-button">
+                Create Event
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="logo">
+            Event<span>Hub</span>
+        </div>
+
+        <p>
+            © 2026 EventHub. Built for DecodeLabs Project 4.
+        </p>
+
+    </footer>
+    <!-- Edit Event Modal -->
+<div id="editModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="section-tag">UPDATE</p>
+                <h2>Edit Event</h2>
+            </div>
+
+            <button
+                type="button"
+                id="closeModal"
+                class="close-button"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="editForm">
+
+            <div class="form-group">
+
+                <label for="editTitle">
+                    Event Title
+                </label>
+
+                <input
+                    type="text"
+                    id="editTitle"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="editDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="editDescription"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="editDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="editDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editTime">
+                        Time
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editTime"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="editLocation">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editLocation"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editCategory">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editCategory"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="editOrganizer">
+                    Organizer
+                </label>
+
+                <input
+                    type="text"
+                    id="editOrganizer"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelEdit"
+                    class="cancel-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
