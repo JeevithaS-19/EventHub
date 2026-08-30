@@ -571,3 +571,108 @@ a {
         width: 100%;
     }
 }
+
+/* =========================
+   Register Button
+========================= */
+
+.register-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    background: #5b5ce2;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   Registrations List
+========================= */
+
+.registration-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.registration-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f8f9fc;
+}
+
+.registration-details h4 {
+    margin: 0 0 5px;
+    font-size: 16px;
+}
+
+.registration-details p {
+    margin: 0;
+    color: #667085;
+    font-size: 14px;
+}
+
+.registration-number {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #5b5ce2;
+    color: white;
+    font-weight: 700;
+}
+
+.no-registrations {
+    text-align: center;
+    padding: 35px 20px;
+    color: #667085;
+}
+
+@media (max-width: 600px) {
+
+    .registration-item {
+        align-items: flex-start;
+    }
+
+    .registration-number {
+        flex-shrink: 0;
+    }
+}
+
+/* =========================
+   View Registrations Button
+========================= */
+
+.view-registrations-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    background: #172033;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-registrations-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}

@@ -448,6 +448,121 @@
 
 </div>
 
+<!-- Registration Modal -->
+<div id="registrationModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="section-tag">JOIN EVENT</p>
+                <h2>Register for Event</h2>
+            </div>
+
+            <button
+                type="button"
+                id="closeRegistrationModal"
+                class="close-button"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="registrationForm">
+
+            <div class="form-group">
+
+                <label for="registrationName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="registrationName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="registrationEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="registrationEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelRegistration"
+                    class="cancel-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Register Now
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- View Registrations Modal -->
+<div id="registrationsListModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+                <p class="section-tag">PARTICIPANTS</p>
+                <h2>Event Registrations</h2>
+            </div>
+
+            <button
+                type="button"
+                id="closeRegistrationsList"
+                class="close-button"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <div id="registrationsList">
+
+            <div class="loading">
+                Loading registrations...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
     <script src="script.js"></script>
 

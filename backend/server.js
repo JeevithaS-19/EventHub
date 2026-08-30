@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/db");
 const eventRoutes = require("./routes/eventRoutes");
+const registrationRoutes = require("./routes/registrationRoutes");
 const app = express();
 connectDB();
 
@@ -11,6 +12,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use("/api/events", eventRoutes);
+app.use("/api/registrations", registrationRoutes);
 
 
 // Test route
