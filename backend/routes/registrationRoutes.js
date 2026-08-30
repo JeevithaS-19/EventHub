@@ -1,19 +1,33 @@
 const express = require("express");
 
+const router = express.Router();
+
 const {
     registerForEvent,
-    getEventRegistrations
+    getEventRegistrations,
+    deleteRegistration
 } = require("../controllers/registrationController");
-
-const router = express.Router();
 
 
 // Register for an event
-router.post("/", registerForEvent);
+router.post(
+    "/",
+    registerForEvent
+);
 
 
 // Get registrations for an event
-router.get("/:eventId", getEventRegistrations);
+router.get(
+    "/:eventId",
+    getEventRegistrations
+);
+
+
+// Delete a registration
+router.delete(
+    "/:id",
+    deleteRegistration
+);
 
 
 module.exports = router;

@@ -76,10 +76,8 @@ const loadEvents = async () => {
             </div>
         `;
 
-
         const response =
             await fetch(API_URL);
-
 
         if (!response.ok) {
             throw new Error(
@@ -87,18 +85,14 @@ const loadEvents = async () => {
             );
         }
 
-
         const events =
             await response.json();
 
-
         await displayEvents(events);
-
 
     } catch (error) {
 
         console.error(error);
-
 
         eventsContainer.innerHTML = `
             <div class="error-state">
@@ -151,7 +145,6 @@ const displayEvents = async (events) => {
                     const registrations =
                         await response.json();
 
-
                     registrationCounts[event._id] =
                         registrations.length;
 
@@ -161,14 +154,12 @@ const displayEvents = async (events) => {
                         0;
                 }
 
-
             } catch (error) {
 
                 console.error(
                     "Failed to get registration count:",
                     error
                 );
-
 
                 registrationCounts[event._id] =
                     0;
@@ -291,14 +282,11 @@ const filterEvents = async () => {
         const search =
             searchInput.value.trim();
 
-
         const category =
             categoryFilter.value;
 
-
         const location =
             locationFilter.value.trim();
-
 
         const params =
             new URLSearchParams();
@@ -785,7 +773,6 @@ registrationForm.addEventListener(
             registrationForm.reset();
 
 
-            // Refresh registration count
             await loadEvents();
 
 
@@ -935,8 +922,20 @@ const viewRegistrations = async (
                         </div>
 
 
-                        <div class="registration-number">
-                            ${index + 1}
+                        <div class="registration-actions">
+
+                            <div class="registration-number">
+                                ${index + 1}
+                            </div>
+
+
+                            <button
+                                class="delete-registration-button"
+                                onclick="deleteRegistration('${registration._id}', '${eventId}')"
+                            >
+                                Delete
+                            </button>
+
                         </div>
 
                     </div>
@@ -971,6 +970,77 @@ const viewRegistrations = async (
 
 
 // =========================
+// Delete Registration
+// =========================
+
+const deleteRegistration = async (
+    registrationId,
+    eventId
+) => {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this registration?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `http://localhost:5000/api/registrations/${registrationId}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Failed to delete registration"
+            );
+        }
+
+
+        alert(
+            "Registration deleted successfully"
+        );
+
+
+        // Refresh the registration list
+        await viewRegistrations(
+            eventId
+        );
+
+
+        // Refresh registration count
+        await loadEvents();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            error.message
+        );
+    }
+};
+
+
+// =========================
 // Close Registrations Modal
 // =========================
 
@@ -982,14 +1052,12 @@ const closeRegistrationsModal = () => {
 };
 
 
-// Close button
 closeRegistrationsList.addEventListener(
     "click",
     closeRegistrationsModal
 );
 
 
-// Close when clicking outside modal
 registrationsListModal.addEventListener(
     "click",
     (event) => {
@@ -1076,15 +1144,17 @@ eventForm.addEventListener(
                 );
 
 
+            const result =
+                await response.json();
+
+
             if (!response.ok) {
 
                 throw new Error(
+                    result.message ||
                     "Failed to create event"
                 );
             }
-
-
-            await response.json();
 
 
             eventForm.reset();
@@ -1104,6 +1174,7 @@ eventForm.addEventListener(
 
 
             alert(
+                error.message ||
                 "Failed to create event"
             );
         }
