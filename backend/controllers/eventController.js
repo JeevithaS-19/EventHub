@@ -1,11 +1,50 @@
 const Event = require("../models/Event");
 
-// Get all events
+// Get all events with search and filters
 const getEvents = async (req, res) => {
     try {
-        const events = await Event.find().sort({ date: 1 });
+        const { search, category, location } = req.query;
+
+        const filter = {};
+
+        // Filter by category
+        if (category) {
+            filter.category = category;
+        }
+
+        // Filter by location
+        if (location) {
+            filter.location = location;
+        }
+
+        // Search by title, description, or organizer
+        if (search) {
+            filter.$or = [
+                {
+                    title: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+                {
+                    description: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+                {
+                    organizer: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                }
+            ];
+        }
+
+        const events = await Event.find(filter).sort({ date: 1 });
 
         res.status(200).json(events);
+
     } catch (error) {
         res.status(500).json({
             message: "Failed to fetch events",
@@ -13,6 +52,7 @@ const getEvents = async (req, res) => {
         });
     }
 };
+
 
 // Get a single event
 const getEventById = async (req, res) => {
@@ -26,6 +66,7 @@ const getEventById = async (req, res) => {
         }
 
         res.status(200).json(event);
+
     } catch (error) {
         res.status(500).json({
             message: "Failed to fetch event",
@@ -34,12 +75,14 @@ const getEventById = async (req, res) => {
     }
 };
 
+
 // Create an event
 const createEvent = async (req, res) => {
     try {
         const event = await Event.create(req.body);
 
         res.status(201).json(event);
+
     } catch (error) {
         res.status(400).json({
             message: "Failed to create event",
@@ -47,6 +90,7 @@ const createEvent = async (req, res) => {
         });
     }
 };
+
 
 // Update an event
 const updateEvent = async (req, res) => {
@@ -67,6 +111,7 @@ const updateEvent = async (req, res) => {
         }
 
         res.status(200).json(event);
+
     } catch (error) {
         res.status(400).json({
             message: "Failed to update event",
@@ -74,6 +119,7 @@ const updateEvent = async (req, res) => {
         });
     }
 };
+
 
 // Delete an event
 const deleteEvent = async (req, res) => {
@@ -89,6 +135,7 @@ const deleteEvent = async (req, res) => {
         res.status(200).json({
             message: "Event deleted successfully"
         });
+
     } catch (error) {
         res.status(500).json({
             message: "Failed to delete event",
@@ -97,6 +144,8 @@ const deleteEvent = async (req, res) => {
     }
 };
 
+
+// Export controllers
 module.exports = {
     getEvents,
     getEventById,
